@@ -12,6 +12,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet var numberButtons: [UIButton]!
     
+    var calculation = Calculation()
+    
     var elements: [String] {
         return textView.text.split(separator: " ").map { "\($0)" }
     }
@@ -68,7 +70,25 @@ class ViewController: UIViewController {
             alertCanAddOperator()
         }
     }
-
+    
+    
+    @IBAction func tappedDivisionButton(_ sender: UIButton) {
+        if canAddOperator {
+            textView.text.append(" ÷ ")
+        } else {
+            alertCanAddOperator()
+        }
+    }
+    
+    
+    @IBAction func tappedMultiplicationButton(_ sender: UIButton) {
+        if canAddOperator {
+            textView.text.append(" x ")
+        } else {
+            alertCanAddOperator()
+        }
+    }
+    
     @IBAction func tappedEqualButton(_ sender: UIButton) {
         guard expressionIsCorrect else {
             let alertVC = UIAlertController(title: "Zéro!", message: "Entrez une expression correcte !", preferredStyle: .alert)
@@ -85,7 +105,9 @@ class ViewController: UIViewController {
         // Create local copy of operations
         var operationsToReduce = elements
         
+        
         // Iterate over operations while an operand still here
+        
         while operationsToReduce.count > 1 {
             let left = Int(operationsToReduce[0])!
             let operand = operationsToReduce[1]
@@ -95,6 +117,8 @@ class ViewController: UIViewController {
             switch operand {
             case "+": result = left + right
             case "-": result = left - right
+            case "x": result = left * right
+            case "÷": result = left / right
             default: fatalError("Unknown operator !")
             }
             
