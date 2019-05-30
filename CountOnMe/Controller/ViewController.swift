@@ -12,7 +12,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet var numberButtons: [UIButton]!
     
-    var calculation = Calculation()
     
     var elements: [String] {
         return textView.text.split(separator: " ").map { "\($0)" }
@@ -20,15 +19,16 @@ class ViewController: UIViewController {
     
     // Error check computed variables
     var expressionIsCorrect: Bool {
-        return elements.last != "+" && elements.last != "-"
+        return elements.last != "+" && elements.last != "-" && elements.last != "x" && elements.last != "÷"
     }
     
     var expressionHaveEnoughElement: Bool {
         return elements.count >= 3
     }
     
+    
     var canAddOperator: Bool {
-        return elements.last != "+" && elements.last != "-"
+        return elements.last != "+" && elements.last != "-" && elements.last != "x" && elements.last != "÷"
     }
     
     var expressionHaveResult: Bool {
@@ -89,6 +89,14 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func tappedCancelButton(_ sender: Any) {
+        textView.text.removeAll()
+        textView.text.append("1+1=2")
+    }
+    
+    
+    
+    
     @IBAction func tappedEqualButton(_ sender: UIButton) {
         guard expressionIsCorrect else {
             let alertVC = UIAlertController(title: "Zéro!", message: "Entrez une expression correcte !", preferredStyle: .alert)
@@ -102,6 +110,7 @@ class ViewController: UIViewController {
             return self.present(alertVC, animated: true, completion: nil)
         }
         
+     
         // Create local copy of operations
         var operationsToReduce = elements
         
@@ -113,12 +122,12 @@ class ViewController: UIViewController {
             let operand = operationsToReduce[1]
             let right = Int(operationsToReduce[2])!
             
-            let result: Int
+            let result: Float
             switch operand {
-            case "+": result = left + right
-            case "-": result = left - right
-            case "x": result = left * right
-            case "÷": result = left / right
+            case "+": result = Float(left + right)
+            case "-": result = Float(left - right)
+            case "x": result = Float(left * right)
+            case "÷": result = Float(left / right)
             default: fatalError("Unknown operator !")
             }
             
