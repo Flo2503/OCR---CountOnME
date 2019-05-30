@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet var numberButtons: [UIButton]!
     
-    
+    var alertManager = AlertManager()
     var elements: [String] {
         return textView.text.split(separator: " ").map { "\($0)" }
     }
@@ -59,7 +59,7 @@ class ViewController: UIViewController {
         if canAddOperator {
             textView.text.append(" + ")
         } else {
-            alertCanAddOperator()
+            alertManager.alertCanAddOperator(controller: self)
         }
     }
     
@@ -67,7 +67,7 @@ class ViewController: UIViewController {
         if canAddOperator {
             textView.text.append(" - ")
         } else {
-            alertCanAddOperator()
+            alertManager.alertCanAddOperator(controller: self)
         }
     }
     
@@ -76,7 +76,7 @@ class ViewController: UIViewController {
         if canAddOperator {
             textView.text.append(" ÷ ")
         } else {
-            alertCanAddOperator()
+            alertManager.alertCanAddOperator(controller: self)
         }
     }
     
@@ -85,7 +85,7 @@ class ViewController: UIViewController {
         if canAddOperator {
             textView.text.append(" x ")
         } else {
-            alertCanAddOperator()
+            alertManager.alertCanAddOperator(controller: self)
         }
     }
     
@@ -97,18 +97,13 @@ class ViewController: UIViewController {
     
     
     
-    
     @IBAction func tappedEqualButton(_ sender: UIButton) {
         guard expressionIsCorrect else {
-            let alertVC = UIAlertController(title: "Zéro!", message: "Entrez une expression correcte !", preferredStyle: .alert)
-            alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-            return self.present(alertVC, animated: true, completion: nil)
+            return alertManager.alertExpressionCorrect(controller: self)
         }
         
         guard expressionHaveEnoughElement else {
-            let alertVC = UIAlertController(title: "Zéro!", message: "Démarrez un nouveau calcul !", preferredStyle: .alert)
-            alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-            return self.present(alertVC, animated: true, completion: nil)
+            return alertManager.alertExpressionEnoughElement(controller: self)
         }
         
      
@@ -129,9 +124,7 @@ class ViewController: UIViewController {
             case "-": result = Float(left - right)
             case "x": result = Float(left * right)
             case "÷": result = Float(left / right)
-            default:  let alertVC = UIAlertController(title: "Opération impossible", message: "Démarrez un nouveau calcul !", preferredStyle: .alert)
-            alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-            return self.present(alertVC, animated: true, completion: nil)
+            default: return alertManager.alertOperationToReduce(controller: self)
             }
             
             operationsToReduce = Array(operationsToReduce.dropFirst(3))
@@ -141,11 +134,7 @@ class ViewController: UIViewController {
         textView.text.append(" = \(operationsToReduce.first!)")
     }
     
-    func alertCanAddOperator() {
-        let alertVC = UIAlertController(title: "Zéro!", message: "Un operateur est déja mis !", preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        self.present(alertVC, animated: true, completion: nil)
-    }
+    
    
 
 }
