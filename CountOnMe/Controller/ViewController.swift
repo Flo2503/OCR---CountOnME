@@ -89,6 +89,7 @@ class ViewController: UIViewController {
         }
     }
     
+    
     @IBAction func tappedCancelButton(_ sender: Any) {
         textView.text.removeAll()
         textView.text.append("1+1=2")
@@ -118,9 +119,9 @@ class ViewController: UIViewController {
         // Iterate over operations while an operand still here
         
         while operationsToReduce.count > 1 {
-            let left = Int(operationsToReduce[0])!
+            let left = Float(operationsToReduce[0])!
             let operand = operationsToReduce[1]
-            let right = Int(operationsToReduce[2])!
+            let right = Float(operationsToReduce[2])!
             
             let result: Float
             switch operand {
@@ -128,7 +129,9 @@ class ViewController: UIViewController {
             case "-": result = Float(left - right)
             case "x": result = Float(left * right)
             case "÷": result = Float(left / right)
-            default: fatalError("Unknown operator !")
+            default:  let alertVC = UIAlertController(title: "Opération impossible", message: "Démarrez un nouveau calcul !", preferredStyle: .alert)
+            alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            return self.present(alertVC, animated: true, completion: nil)
             }
             
             operationsToReduce = Array(operationsToReduce.dropFirst(3))
