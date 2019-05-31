@@ -17,6 +17,7 @@ class ViewController: UIViewController {
         return textView.text.split(separator: " ").map { "\($0)" }
     }
     
+    
     // Error check computed variables
     var expressionIsCorrect: Bool {
         return elements.last != "+" && elements.last != "-" && elements.last != "x" && elements.last != "÷"
@@ -119,6 +120,9 @@ class ViewController: UIViewController {
             let right = Float(operationsToReduce[2])!
             
             let result: Float
+            var isInteger: Bool {
+                return floorf(result) == result
+            }
             switch operand {
             case "+": result = Float(left + right)
             case "-": result = Float(left - right)
@@ -126,16 +130,19 @@ class ViewController: UIViewController {
             case "÷": result = Float(left / right)
             default: return alertManager.alertOperationToReduce(controller: self)
             }
-            
             operationsToReduce = Array(operationsToReduce.dropFirst(3))
-            operationsToReduce.insert("\(result)", at: 0)
+            if isInteger {
+                operationsToReduce.insert("\(Int(result))", at: 0)
+            }else {
+                operationsToReduce.insert("\(result)", at: 0)
+            }
         }
         
         textView.text.append(" = \(operationsToReduce.first!)")
     }
     
-    
-   
 
 }
+
+
 
