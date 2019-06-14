@@ -10,8 +10,10 @@ import Foundation
 
 class SimpleCalc {
     
+
+    
   
-    func test(_ elements: [String]) -> String? {
+    func didTappedEqualButton(_ elements: [String]) -> String? {
         
         // Create local copy of operations
         var operationsToReduce = elements
@@ -31,7 +33,7 @@ class SimpleCalc {
             case "+": result = Float(left + right)
             case "-": result = Float(left - right)
             case "x": result = Float(left * right)
-            case "÷": result = Float(left / right)
+            case "/": result = Float(left / right)
             default: return nil
             }
             
@@ -45,4 +47,7 @@ class SimpleCalc {
         
         return operationsToReduce.first
     }
+    
+    
+    
 }

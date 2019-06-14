@@ -11,29 +11,67 @@ import XCTest
 
 class SimpleCalcTests: XCTestCase {
     
-    //si je donne 2+1 a camcilaution il doit me retourner 3
     // si je donne 2+ a camculation il doit me retourner une erreur (surtout pas une larte)
-    //si j d 2+-1 a calc il return erreur
-    //di je d 2+1-3 a clac return 0
-    //si j d 2.1+1-3.1 a clas il retunr 0
-    // si j d 3.1 + 1 il return 4.1
-    //si j d 1+2x3 il return 7
     //si j d 4/0 il return erreur
-    //
     
+    var simpleCalc: SimpleCalc!
+    
+    override func setUp() {
+        super.setUp()
+        simpleCalc = SimpleCalc()
+    }
     
     func testGivenNumbersAre2And1_WhenAdd_ThenResultIs3() {
-     
-        let simpleCalc = SimpleCalc()
         
-        var inputs = ["2", "+", "1"]
-        var expected = "3"
-        var result = simpleCalc.test(inputs)
+        let inputs = ["2", "+", "1"]
+        let expected = "3"
+        let result = simpleCalc.didTappedEqualButton(inputs)
+        
+        XCTAssertEqual(expected, result)
+        
+    }
+    
+    func testGivenNumbersAre5And10_WhenMinus_ThenResultIsMinus5() {
+        
+        let inputs = ["5", "-", "10"]
+        let expected = "-5"
+        let result = simpleCalc.didTappedEqualButton(inputs)
+        
+        XCTAssertEqual(expected, result)
+        
+    }
+    
+    func testGiven2Plus1Minus3_WhenCalculate_ThenResultIs0() {
+        
+        let inputs = ["2", "+", "1", "-", "3"]
+        let expected = "0"
+        let result = simpleCalc.didTappedEqualButton(inputs)
+        
+        XCTAssertEqual(expected, result)
+        
+    }
+    
+    func testGivenNumbersAre2Point1And1_WhenAdd_ThenResultIs3Point1() {
+        
+        let inputs = ["2.1", "+", "1"]
+        let expected = "3.1"
+        let result = simpleCalc.didTappedEqualButton(inputs)
         
         XCTAssertEqual(expected, result)
         
     }
     
     
+    func testGivenNumbers1Plus2Times3_WhenCalculate_ThenResultIs7() {
         
+        let inputs = ["1", "+", "2", "x", "3"]
+        let expected = "7"
+        let result = simpleCalc.didTappedEqualButton(inputs)
+        
+        XCTAssertEqual(expected, result)
+        
+    }
+    
+    
+    
 }

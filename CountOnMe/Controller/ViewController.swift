@@ -12,15 +12,18 @@ class ViewController: UIViewController {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet var numberButtons: [UIButton]!
     
+    var simpleCalc = SimpleCalc()
     var alertManager = AlertManager()
     var elements: [String] {
         return textView.text.split(separator: " ").map { "\($0)" }
     }
     
+
+    
     
     // Error check computed variables
     var expressionIsCorrect: Bool {
-        return elements.last != "+" && elements.last != "-" && elements.last != "x" && elements.last != "÷"
+        return elements.last != "+" && elements.last != "-" && elements.last != "x" && elements.last != "/"
     }
     
     var expressionHaveEnoughElement: Bool {
@@ -29,11 +32,11 @@ class ViewController: UIViewController {
     
     
     var canAddOperator: Bool {
-        return elements.last != "+" && elements.last != "-" && elements.last != "x" && elements.last != "÷"
+        return elements.last != "+" && elements.last != "-" && elements.last != "x" && elements.last != "/"
     }
     
-    var expressionHaveResult: Bool {
-        return textView.text.firstIndex(of: "=") != nil
+    var expressionHaveResultOrZero: Bool {
+        return textView.text.firstIndex(of: "=") != nil || textView.text == "0"
     }
     
     // View Life cycles
@@ -49,7 +52,7 @@ class ViewController: UIViewController {
             return
         }
         
-        if expressionHaveResult {
+        if expressionHaveResultOrZero {
             textView.text = ""
         }
         
@@ -75,7 +78,7 @@ class ViewController: UIViewController {
     
     @IBAction func tappedDivisionButton(_ sender: UIButton) {
         if canAddOperator {
-            textView.text.append(" ÷ ")
+            textView.text.append(" / ")
         } else {
             alertManager.alertCanAddOperator(controller: self)
         }
@@ -93,7 +96,7 @@ class ViewController: UIViewController {
     
     @IBAction func tappedCancelButton(_ sender: Any) {
         textView.text.removeAll()
-        textView.text.append("1+1=2")
+        textView.text.append("0")
     }
     
     
@@ -107,10 +110,8 @@ class ViewController: UIViewController {
             return alertManager.alertExpressionEnoughElement(controller: self)
         }
         
-     
-      
-        
-        //textView.text.append(" = \(operationsToReduce.first!)")
+        let result = simpleCalc.didTappedEqualButton(elements)
+        textView.text.append(" = \(result!)")
     }
     
 
