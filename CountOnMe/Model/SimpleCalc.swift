@@ -10,8 +10,7 @@ import Foundation
 
 class SimpleCalc {
     
-
-    
+   
   
     func didTappedEqualButton(_ elements: [String]) -> String? {
         
@@ -29,12 +28,19 @@ class SimpleCalc {
             var isInteger: Bool {
                 return floorf(result) == result
             }
+            var isDevidedByZero: Bool {
+                return operationsToReduce[1] == "/" && operationsToReduce[2] == "0"
+            }
             switch operand {
             case "+": result = Float(left + right)
             case "-": result = Float(left - right)
             case "x": result = Float(left * right)
             case "/": result = Float(left / right)
             default: return nil
+            }
+            
+            if isDevidedByZero {
+                return nil
             }
             
             operationsToReduce = Array(operationsToReduce.dropFirst(3))

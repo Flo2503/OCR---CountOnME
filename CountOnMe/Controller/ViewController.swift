@@ -22,16 +22,12 @@ class ViewController: UIViewController {
     
     
     // Error check computed variables
-    var expressionIsCorrect: Bool {
-        return elements.last != "+" && elements.last != "-" && elements.last != "x" && elements.last != "/"
-    }
-    
     var expressionHaveEnoughElement: Bool {
         return elements.count >= 3
     }
     
     
-    var canAddOperator: Bool {
+    var expressionIsCorrect: Bool {
         return elements.last != "+" && elements.last != "-" && elements.last != "x" && elements.last != "/"
     }
     
@@ -60,7 +56,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tappedAdditionButton(_ sender: UIButton) {
-        if canAddOperator {
+        if expressionIsCorrect {
             textView.text.append(" + ")
         } else {
             alertManager.alertCanAddOperator(controller: self)
@@ -68,7 +64,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tappedSubstractionButton(_ sender: UIButton) {
-        if canAddOperator {
+        if expressionIsCorrect {
             textView.text.append(" - ")
         } else {
             alertManager.alertCanAddOperator(controller: self)
@@ -77,7 +73,7 @@ class ViewController: UIViewController {
     
     
     @IBAction func tappedDivisionButton(_ sender: UIButton) {
-        if canAddOperator {
+        if expressionIsCorrect {
             textView.text.append(" / ")
         } else {
             alertManager.alertCanAddOperator(controller: self)
@@ -86,7 +82,7 @@ class ViewController: UIViewController {
     
     
     @IBAction func tappedMultiplicationButton(_ sender: UIButton) {
-        if canAddOperator {
+        if expressionIsCorrect {
             textView.text.append(" x ")
         } else {
             alertManager.alertCanAddOperator(controller: self)
@@ -110,8 +106,14 @@ class ViewController: UIViewController {
             return alertManager.alertExpressionEnoughElement(controller: self)
         }
         
-        let result = simpleCalc.didTappedEqualButton(elements)
-        textView.text.append(" = \(result!)")
+        
+        
+        if let result = simpleCalc.didTappedEqualButton(elements) {
+            textView.text.append(" = \(result)")
+        } else {
+            alertManager.alertExpressionCorrect(controller: self)
+        }
+        
     }
     
 

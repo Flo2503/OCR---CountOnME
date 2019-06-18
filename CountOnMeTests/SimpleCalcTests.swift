@@ -11,8 +11,8 @@ import XCTest
 
 class SimpleCalcTests: XCTestCase {
     
-    // si je donne 2+ a camculation il doit me retourner une erreur (surtout pas une larte)
-    //si j d 4/0 il return erreur
+    // si je donne 2+ a simplecalc il doit me retourner une erreur (surtout pas une alerte)
+    //si j d 4/0 il retourne erreur
     
     var simpleCalc: SimpleCalc!
     
@@ -72,6 +72,12 @@ class SimpleCalcTests: XCTestCase {
         
     }
     
-    
+    func testGivenAnyNumber_WhenDevidedByZero_ThenResultIsError() {
+        
+        let inputs = ["4", "/", "0"]
+        let result = simpleCalc.didTappedEqualButton(inputs)
+        
+        XCTAssertNil(result)
+    }
     
 }
