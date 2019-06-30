@@ -190,7 +190,7 @@
                                                 <rect key="frame" x="0.0" y="64" width="61.333333333333336" height="54"/>
                                                 <color key="backgroundColor" red="0.76980084201507093" green="0.46792099903456436" blue="0.81217449903488159" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                                <state key="normal" title="÷">
+                                                <state key="normal" title="/">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
