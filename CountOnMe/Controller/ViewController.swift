@@ -22,49 +22,42 @@ class ViewController: UIViewController {
     var expressionHaveResultOrZero: Bool {
         return textView.text.firstIndex(of: "=") != nil || textView.text == "0"
     }
-    var expressionIsCorrect: Bool {
-        return elements.last != "+" && elements.last != "-" && elements.last != "x" && elements.last != "/"
-    }
-    var expressionHaveEnoughElement: Bool {
-        return elements.count >= 3
-    }
     // View Life cycles
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     // MARK: View Actions
     @IBAction func tappedNumberButton(_ sender: UIButton) {
-        guard let numberText = sender.title(for: .normal) else {
-            return
+        if let numberText = sender.title(for: .normal) {
+            if expressionHaveResultOrZero {
+                textView.text = ""
+            }
+            textView.text.append(numberText)
         }
-        if expressionHaveResultOrZero {
-            textView.text = ""
-        }
-        textView.text.append(numberText)
     }
     @IBAction func tappedAdditionButton(_ sender: UIButton) {
-        if expressionIsCorrect {
+        if simpleCalc.expressionIsCorrect(elements) {
             textView.text.append(" + ")
         } else {
             alertManager.alertCanAddOperator(controller: self)
         }
     }
     @IBAction func tappedSubstractionButton(_ sender: UIButton) {
-        if expressionIsCorrect {
+        if simpleCalc.expressionIsCorrect(elements) {
             textView.text.append(" - ")
         } else {
             alertManager.alertCanAddOperator(controller: self)
         }
     }
     @IBAction func tappedDivisionButton(_ sender: UIButton) {
-        if expressionIsCorrect {
+        if simpleCalc.expressionIsCorrect(elements) {
             textView.text.append(" / ")
         } else {
             alertManager.alertCanAddOperator(controller: self)
         }
     }
     @IBAction func tappedMultiplicationButton(_ sender: UIButton) {
-        if expressionIsCorrect {
+        if simpleCalc.expressionIsCorrect(elements) {
             textView.text.append(" x ")
         } else {
             alertManager.alertCanAddOperator(controller: self)
@@ -75,14 +68,10 @@ class ViewController: UIViewController {
         textView.text.append("0")
     }
     @IBAction func tappedEqualButton(_ sender: UIButton) {
-        guard expressionIsCorrect else {
-            return alertManager.alertExpressionCorrect(controller: self)
-        }
-        guard expressionHaveEnoughElement else {
-            return alertManager.alertExpressionEnoughElement(controller: self)
-        }
-        if let result = simpleCalc.didTappedEqualButton(elements) {
-            textView.text.append(" = \(result)")
+        if simpleCalc.expressionHaveEnoughElement(elements) {
+            if let result = simpleCalc.didTappedEqualButton(elements) {
+                textView.text.append(" = \(result)")
+            }
         } else {
             alertManager.alertExpressionCorrect(controller: self)
         }

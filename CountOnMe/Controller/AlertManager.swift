@@ -21,11 +21,6 @@ struct AlertManager {
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         controller.present(alertVC, animated: true, completion: nil)
     }
-    func alertExpressionEnoughElement(controller: UIViewController) {
-        let alertVC = UIAlertController(title: "Zéro!", message: "Démarrez un nouveau calcul !", preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        controller.present(alertVC, animated: true, completion: nil)
-    }
     func alertOperationToReduce(controller: UIViewController) {
         let alertVC = UIAlertController(title: "Opération impossible", message: "Démarrez un nouveau calcul !", preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))

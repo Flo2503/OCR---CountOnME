@@ -9,6 +9,13 @@
 import Foundation
 
 class SimpleCalc {
+    // MARK: - // Error check computed methods
+    func expressionIsCorrect(_ elements: [String]) -> Bool {
+        return elements.last != "+" && elements.last != "-" && elements.last != "x" && elements.last != "/"
+    }
+    func expressionHaveEnoughElement(_ elements: [String]) -> Bool {
+        return elements.count >= 3
+    }
     // Method called when tapped equal button
     func didTappedEqualButton(_ elements: [String]) -> String? {
         // MARK: - Property
@@ -17,6 +24,9 @@ class SimpleCalc {
         while operationsToReduce.count > 1 {
             // MARK: - Property
             let operand = operationsToReduce[1]
+            guard expressionHaveEnoughElement(elements) && expressionIsCorrect(elements) else {
+                return nil
+            }
             if let left = Float(operationsToReduce[0]), let right = Float(operationsToReduce[2]) {
                 var result: Float
                 // Check that the decimal is necessary
@@ -49,4 +59,10 @@ class SimpleCalc {
         }
         return operationsToReduce.first
     }
+    /*func divide(_ elements: [String]) -> String? {
+        var operationsToReduce = elements
+        var divided = operationsToReduce.firstIndex(of: "/")
+        while operationsToReduce.firstIndex(of: "/") {
+            
+        }*/
 }
