@@ -35,6 +35,13 @@ class ViewController: UIViewController {
             textView.text.append(numberText)
         }
     }
+    @IBAction func tappedPointButton(_ sender: UIButton) {
+        if simpleCalc.canAddPoint(elements) {
+            textView.text.append(".")
+        } else {
+            alertManager.alertExpressionCorrect(controller: self)
+        }
+    }
     @IBAction func tappedAdditionButton(_ sender: UIButton) {
         if simpleCalc.expressionIsCorrect(elements) {
             textView.text.append(" + ")

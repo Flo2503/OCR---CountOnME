@@ -16,6 +16,10 @@ class SimpleCalc {
     func expressionHaveEnoughElement(_ elements: [String]) -> Bool {
         return elements.count >= 3
     }
+    func canAddPoint(_ elements: [String]) -> Bool {
+        if let lastElement = elements.last { return Int(lastElement) != nil }
+        return false
+    }
     // Method called when tapped equal button
     func didTappedEqualButton(_ elements: [String]) -> String? {
         // MARK: - Property
@@ -59,10 +63,4 @@ class SimpleCalc {
         }
         return operationsToReduce.first
     }
-    /*func divide(_ elements: [String]) -> String? {
-        var operationsToReduce = elements
-        var divided = operationsToReduce.firstIndex(of: "/")
-        while operationsToReduce.firstIndex(of: "/") {
-            
-        }*/
 }

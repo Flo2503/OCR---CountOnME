@@ -118,7 +118,7 @@
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tappedNumberButton:" destination="eqK-jh-KKu" eventType="touchUpInside" id="f7k-2F-E1q"/>
+                                                    <action selector="tappedPointButton:" destination="eqK-jh-KKu" eventType="touchUpInside" id="5xb-mZ-RSz"/>
                                                 </connections>
                                             </button>
                                         </subviews>

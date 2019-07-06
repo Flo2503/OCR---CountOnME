@@ -41,17 +41,17 @@ class SimpleCalcTests: XCTestCase {
         let result = simpleCalc.didTappedEqualButton(inputs)
         XCTAssertEqual(expected, result)
     }
-    func testGivenAnyNumber_WhenDevidedByZero_ThenResultIsError() {
+    func testGivenAnyNumber_WhenDevidedByZero_ThenResultIsNil() {
         let inputs = ["4", "/", "0"]
         let result = simpleCalc.didTappedEqualButton(inputs)
         XCTAssertNil(result)
     }
-    func testGivenOneNumberAndOneOperator_WhenTappeEqual_ThenResultIsError() {
+    func testGivenOneNumberAndOneOperator_WhenTappeEqual_ThenResultIsNil() {
         let inputs = ["4", "/"]
         let result = simpleCalc.didTappedEqualButton(inputs)
         XCTAssertNil(result)
     }
-    func testGivenFollowingOperators_WhenTappeEqual_ThenResultIsError() {
+    func testGivenFollowingOperators_WhenTappeEqual_ThenResultIsNil() {
         let inputs = ["4", "+", "/"]
         let result = simpleCalc.didTappedEqualButton(inputs)
         XCTAssertNil(result)
@@ -61,5 +61,10 @@ class SimpleCalcTests: XCTestCase {
         let expected = "7"
         let result = simpleCalc.didTappedEqualButton(inputs)
         XCTAssertEqual(expected, result)
+    }
+    func testGivenTwoPoints_WhenTappeOnPoint_ThenResultIsNil() {
+        let inputs = ["4", ".", "."]
+        let result = simpleCalc.didTappedEqualButton(inputs)
+        XCTAssertNil(result)
     }
 }
