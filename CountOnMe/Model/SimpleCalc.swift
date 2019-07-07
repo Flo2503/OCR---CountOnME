@@ -43,6 +43,8 @@ class SimpleCalc {
                 }
                 // Read the operator to choose the right calculation
                 switch operand {
+                case "x": result = Float(left * right)
+                case "/": result = Float(left / right)
                 case "+": result = Float(left + right)
                 case "-": result = Float(left - right)
                 default: return nil
