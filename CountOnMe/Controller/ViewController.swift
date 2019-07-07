@@ -75,10 +75,14 @@ class ViewController: UIViewController {
         textView.text.append("0")
     }
     @IBAction func tappedEqualButton(_ sender: UIButton) {
-        if simpleCalc.expressionHaveEnoughElement(elements) {
-            if let result = simpleCalc.didTappedEqualButton(elements) {
-                textView.text.append(" = \(result)")
-            }
+        guard simpleCalc.expressionIsCorrect(elements) else {
+            return alertManager.alertExpressionCorrect(controller: self)
+        }
+        guard simpleCalc.expressionHaveEnoughElement(elements) else {
+            return alertManager.alertExpressionCorrect(controller: self)
+        }
+        if let result = simpleCalc.didTappedEqualButton(elements) {
+            textView.text.append(" = \(result)")
         } else {
             alertManager.alertExpressionCorrect(controller: self)
         }

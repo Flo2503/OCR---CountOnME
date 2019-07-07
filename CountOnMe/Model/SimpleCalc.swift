@@ -45,8 +45,6 @@ class SimpleCalc {
                 switch operand {
                 case "+": result = Float(left + right)
                 case "-": result = Float(left - right)
-                case "x": result = Float(left * right)
-                case "/": result = Float(left / right)
                 default: return nil
                 }
                 if isDevidedByZero {
