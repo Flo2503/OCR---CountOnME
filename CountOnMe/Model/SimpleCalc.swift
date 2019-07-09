@@ -63,4 +63,24 @@ class SimpleCalc {
         }
         return operationsToReduce.first
     }
+    func test(_ elements: [String]) -> String? {
+        var operationsToReduce = elements
+        while elements.contains("x") || elements.contains("/") {
+            if let index = elements.firstIndex(where: {$0 == "x" || $0 == "/"}), let left = Float(operationsToReduce[index - 1]), let right = Float(operationsToReduce[index + 1]) {
+                var result: Float
+                let operand = operationsToReduce[index]
+                switch operand {
+                case "x": result = Float(left * right)
+                case "/": result = Float(left / right)
+                default: return nil
+                }
+                operationsToReduce[index - 1] = "\(result)"
+                operationsToReduce.remove(at: index + 1)
+                operationsToReduce.remove(at: index)
+            }
+            
+        }
+        return nil
+    }
 }
+
