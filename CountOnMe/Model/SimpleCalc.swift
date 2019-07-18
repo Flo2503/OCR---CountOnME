@@ -24,14 +24,17 @@ class SimpleCalc {
     func didTappedEqualButton(_ elements: [String]) -> String? {
         // MARK: - Property
         var operationsToReduce = elements
+        // Make sur expression is correct and exporession have enough element
         guard expressionHaveEnoughElement(elements) && expressionIsCorrect(elements) else {
             return nil
         }
         while operationsToReduce.count > 1 {
+            // Allow priority of calculation (multiply and divide)
             while operationsToReduce.contains("x") || operationsToReduce.contains("/") {
                 if let index = operationsToReduce.firstIndex(where: {$0 == "x" || $0 == "/"}), let left = Float(operationsToReduce[index - 1]), let right = Float(operationsToReduce[index + 1]) {
                     var result: Float
                     let operand = operationsToReduce[index]
+                    // Read the operator to choose the right calculation
                     switch operand {
                     case "x": result = Float(left * right)
                     case "/":
@@ -50,7 +53,7 @@ class SimpleCalc {
             let operand = operationsToReduce[1]
             if let left = Float(operationsToReduce[0]), let right = Float(operationsToReduce[2]) {
                 var result: Float
-                // Check that the decimal is necessary
+                // Check if the decimal is necessary
                 var isInteger: Bool {
                     return floorf(result) == result
                 }
