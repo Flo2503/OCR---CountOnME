@@ -62,11 +62,6 @@ class SimpleCalcTests: XCTestCase {
         let result = simpleCalc.didTappedEqualButton(inputs)
         XCTAssertEqual(expected, result)
     }
-    func testGivenTwoPoints_WhenTappeOnPoint_ThenResultIsNil() {
-        let inputs = ["4", ".", "."]
-        let result = simpleCalc.didTappedEqualButton(inputs)
-        XCTAssertNil(result)
-    }
     func testGivenOperator_WhenPointIsLastElement_ThenResultIsNil() {
         let inputs = ["4", ".", "/"]
         let result = simpleCalc.didTappedEqualButton(inputs)
