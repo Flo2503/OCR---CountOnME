@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eqK-jh-KKu">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="eqK-jh-KKu">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -276,14 +275,14 @@
                                 </variation>
                             </textView>
                         </subviews>
-                        <color key="backgroundColor" red="0.87536688539999996" green="0.84808511389999996" blue="0.83804947389999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.84705883264541626" green="0.84705895185470581" blue="0.84705883264541626" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="T2H-yn-nBB" firstAttribute="top" secondItem="tQO-Y2-VWE" secondAttribute="bottom" id="1ge-fC-f6s"/>
                             <constraint firstItem="Fhl-dE-gDl" firstAttribute="top" secondItem="isI-Gg-Iye" secondAttribute="bottom" constant="10" id="Pbg-lf-hBt"/>
-                            <constraint firstItem="T2H-yn-nBB" firstAttribute="leading" secondItem="AWJ-Vl-uau" secondAttribute="leading" constant="20" id="ZVm-Gj-dbz"/>
+                            <constraint firstItem="T2H-yn-nBB" firstAttribute="leading" secondItem="eIh-hr-C95" secondAttribute="leading" constant="20" id="ZVm-Gj-dbz"/>
                             <constraint firstItem="Fhl-dE-gDl" firstAttribute="top" secondItem="isI-Gg-Iye" secondAttribute="bottom" constant="10" id="bDX-Oe-PZT"/>
-                            <constraint firstItem="AWJ-Vl-uau" firstAttribute="trailing" secondItem="T2H-yn-nBB" secondAttribute="trailing" constant="20" id="e1t-jv-vlw"/>
-                            <constraint firstItem="isI-Gg-Iye" firstAttribute="leading" secondItem="AWJ-Vl-uau" secondAttribute="leading" constant="20" id="fEI-Y5-jEW"/>
+                            <constraint firstAttribute="trailing" secondItem="T2H-yn-nBB" secondAttribute="trailing" constant="20" id="e1t-jv-vlw"/>
+                            <constraint firstItem="isI-Gg-Iye" firstAttribute="leading" secondItem="eIh-hr-C95" secondAttribute="leading" constant="20" id="fEI-Y5-jEW"/>
                             <constraint firstItem="T2H-yn-nBB" firstAttribute="top" secondItem="tQO-Y2-VWE" secondAttribute="bottom" id="fmr-yE-g6f"/>
                             <constraint firstItem="T2H-yn-nBB" firstAttribute="top" secondItem="tQO-Y2-VWE" secondAttribute="bottom" constant="20" id="grX-yd-jK4">
                                 <variation key="heightClass=compact" constant="10"/>
@@ -294,7 +293,7 @@
                             <constraint firstItem="T2H-yn-nBB" firstAttribute="top" secondItem="tQO-Y2-VWE" secondAttribute="bottom" id="jBt-MO-IjS">
                                 <variation key="heightClass=compact" constant="10"/>
                             </constraint>
-                            <constraint firstItem="AWJ-Vl-uau" firstAttribute="trailing" secondItem="isI-Gg-Iye" secondAttribute="trailing" constant="20" id="jnQ-we-n03"/>
+                            <constraint firstAttribute="trailing" secondItem="isI-Gg-Iye" secondAttribute="trailing" constant="20" id="jnQ-we-n03"/>
                             <constraint firstItem="isI-Gg-Iye" firstAttribute="top" secondItem="eIh-hr-C95" secondAttribute="top" constant="10" id="mCW-y7-PaY">
                                 <variation key="heightClass=compact" constant="100"/>
                             </constraint>
@@ -302,8 +301,8 @@
                             <constraint firstItem="isI-Gg-Iye" firstAttribute="top" secondItem="T2H-yn-nBB" secondAttribute="bottom" constant="75" id="oZx-Zd-ros">
                                 <variation key="heightClass=compact" constant="10"/>
                             </constraint>
-                            <constraint firstItem="AWJ-Vl-uau" firstAttribute="trailing" secondItem="isI-Gg-Iye" secondAttribute="trailing" constant="20" id="peH-rg-GhW"/>
-                            <constraint firstItem="isI-Gg-Iye" firstAttribute="leading" secondItem="AWJ-Vl-uau" secondAttribute="leading" constant="20" id="pzB-3P-8vM">
+                            <constraint firstAttribute="trailing" secondItem="isI-Gg-Iye" secondAttribute="trailing" constant="20" id="peH-rg-GhW"/>
+                            <constraint firstItem="isI-Gg-Iye" firstAttribute="leading" secondItem="eIh-hr-C95" secondAttribute="leading" constant="20" id="pzB-3P-8vM">
                                 <variation key="heightClass=compact" constant="50"/>
                             </constraint>
                             <constraint firstItem="isI-Gg-Iye" firstAttribute="top" secondItem="T2H-yn-nBB" secondAttribute="bottom" constant="10" id="uZF-dz-0oa"/>
@@ -311,7 +310,6 @@
                                 <variation key="heightClass=compact" constant="8" symbolic="YES"/>
                             </constraint>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="AWJ-Vl-uau"/>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="peH-rg-GhW"/>
