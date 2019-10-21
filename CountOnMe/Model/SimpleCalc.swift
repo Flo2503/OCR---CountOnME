@@ -29,47 +29,58 @@ class SimpleCalc {
             return nil
         }
         while operationsToReduce.count > 1 {
-            // Allow priority of calculation (multiply and divide)
-            while operationsToReduce.contains("x") || operationsToReduce.contains("/") {
-                if let index = operationsToReduce.firstIndex(where: {$0 == "x" || $0 == "/"}), let left = Float(operationsToReduce[index - 1]), let right = Float(operationsToReduce[index + 1]) {
-                    var result: Float
-                    let operand = operationsToReduce[index]
-                    // Read the operator to choose the right calculation
-                    switch operand {
-                    case "x": result = Float(left * right)
-                    case "/":
-                        if right == 0 {
-                            return nil
-                        }
-                        result = Float(left / right)
-                    default: return nil
-                    }
-                    operationsToReduce[index - 1] = "\(result)"
-                    operationsToReduce.remove(at: index + 1)
-                    operationsToReduce.remove(at: index)
-                }
-            }
-            // MARK: - Property
-            let operand = operationsToReduce[1]
-            if let left = Float(operationsToReduce[0]), let right = Float(operationsToReduce[2]) {
+            // Calls methods to do the calculations
+            operationsToReduce = priorityCalc(operationsToReduce)!
+            operationsToReduce = [nonPriorityCalc(operationsToReduce)!]
+        }
+        return operationsToReduce.first
+    }
+    // Method allowing to make the multiplications and divisions a priority
+    private func priorityCalc(_ elements: [String]) -> [String]? {
+        var operationsToReduce = elements
+        while operationsToReduce.contains("x") || operationsToReduce.contains("/") {
+            if let index = operationsToReduce.firstIndex(where: {$0 == "x" || $0 == "/"}), let left = Float(operationsToReduce[index - 1]), let right = Float(operationsToReduce[index + 1]) {
                 var result: Float
-                // Check if the decimal is necessary
-                var isInteger: Bool {
-                    return floorf(result) == result
-                }
+                let operand = operationsToReduce[index]
                 // Read the operator to choose the right calculation
                 switch operand {
-                case "+": result = Float(left + right)
-                case "-": result = Float(left - right)
+                case "x": result = Float(left * right)
+                case "/":
+                    if right == 0 {
+                        return nil
+                    }
+                    result = Float(left / right)
                 default: return nil
                 }
-                // Reduce each operations
-                operationsToReduce = Array(operationsToReduce.dropFirst(3))
-                if isInteger {
-                    operationsToReduce.insert("\(Int(result))", at: 0)
-                } else {
-                    operationsToReduce.insert("\(result)", at: 0)
-                }
+                operationsToReduce[index - 1] = "\(result)"
+                operationsToReduce.remove(at: index + 1)
+                operationsToReduce.remove(at: index)
+            }
+        }
+        return operationsToReduce
+    }
+    // Method for addition and substraction
+    private func nonPriorityCalc(_ elements: [String]) -> String? {
+        var operationsToReduce = elements
+        let operand = operationsToReduce[1]
+        if let left = Float(operationsToReduce[0]), let right = Float(operationsToReduce[2]) {
+            var result: Float
+            // Check if the decimal is necessary
+            var isInteger: Bool {
+                return floorf(result) == result
+            }
+            // Read the operator to choose the right calculation
+            switch operand {
+            case "+": result = Float(left + right)
+            case "-": result = Float(left - right)
+            default: return nil
+            }
+            // Reduce each operations
+            operationsToReduce = Array(operationsToReduce.dropFirst(3))
+            if isInteger {
+                operationsToReduce.insert("\(Int(result))", at: 0)
+            } else {
+                operationsToReduce.insert("\(result)", at: 0)
             }
         }
         return operationsToReduce.first
