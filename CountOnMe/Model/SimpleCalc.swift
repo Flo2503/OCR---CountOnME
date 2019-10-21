@@ -29,11 +29,16 @@ class SimpleCalc {
             return nil
         }
         while operationsToReduce.count > 1 {
-            // Calls methods to do the calculations
-            operationsToReduce = priorityCalc(operationsToReduce)!
-            operationsToReduce = [nonPriorityCalc(operationsToReduce)!]
+                // Calls methods to do the calculations
+            guard let firstResult = priorityCalc(operationsToReduce) else {
+                return nil
+            }
+            guard let finalResult = nonPriorityCalc(firstResult) else {
+                return nil
+            }
+            operationsToReduce = finalResult
         }
-        return operationsToReduce.first
+           return operationsToReduce.first
     }
     // Method allowing to make the multiplications and divisions a priority
     private func priorityCalc(_ elements: [String]) -> [String]? {
@@ -60,7 +65,7 @@ class SimpleCalc {
         return operationsToReduce
     }
     // Method for addition and substraction
-    private func nonPriorityCalc(_ elements: [String]) -> String? {
+    private func nonPriorityCalc(_ elements: [String]) -> [String]? {
         var operationsToReduce = elements
         let operand = operationsToReduce[1]
         if let left = Float(operationsToReduce[0]), let right = Float(operationsToReduce[2]) {
@@ -83,6 +88,6 @@ class SimpleCalc {
                 operationsToReduce.insert("\(result)", at: 0)
             }
         }
-        return operationsToReduce.first
+        return operationsToReduce
     }
 }
