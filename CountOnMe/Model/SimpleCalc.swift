@@ -33,10 +33,15 @@ class SimpleCalc {
             guard let firstResult = priorityCalc(operationsToReduce) else {
                 return nil
             }
-            guard let finalResult = nonPriorityCalc(firstResult) else {
-                return nil
+            if firstResult.count == 1 {
+                return firstResult.first
+            } else {
+                guard let finalResult = nonPriorityCalc(firstResult) else {
+                    return nil
+                }
+                operationsToReduce = finalResult
             }
-            operationsToReduce = finalResult
+            
         }
            return operationsToReduce.first
     }
@@ -46,6 +51,10 @@ class SimpleCalc {
         while operationsToReduce.contains("x") || operationsToReduce.contains("/") {
             if let index = operationsToReduce.firstIndex(where: {$0 == "x" || $0 == "/"}), let left = Float(operationsToReduce[index - 1]), let right = Float(operationsToReduce[index + 1]) {
                 var result: Float
+                // Check if the decimal is necessary
+                var isInteger: Bool {
+                    return floorf(result) == result
+                }
                 let operand = operationsToReduce[index]
                 // Read the operator to choose the right calculation
                 switch operand {
@@ -57,7 +66,11 @@ class SimpleCalc {
                     result = Float(left / right)
                 default: return nil
                 }
-                operationsToReduce[index - 1] = "\(result)"
+                if isInteger {
+                    operationsToReduce[index - 1] = "\(Int(result))"
+                } else {
+                    operationsToReduce[index - 1] = "\(result)"
+                }
                 operationsToReduce.remove(at: index + 1)
                 operationsToReduce.remove(at: index)
             }
