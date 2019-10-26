@@ -20,7 +20,7 @@ class SimpleCalc {
         if let lastElement = elements.last { return Int(lastElement) != nil }
         return false
     }
-    // Method called when tapped equal button
+    /// Method called when tapped equal button
     func didTappedEqualButton(_ elements: [String]) -> String? {
         // MARK: - Property
         var operationsToReduce = elements

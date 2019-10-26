@@ -67,4 +67,9 @@ class SimpleCalcTests: XCTestCase {
         let result = simpleCalc.didTappedEqualButton(inputs)
         XCTAssertNil(result)
     }
+    func testGivenInt_When_ThenFalse() {
+        let inputs = ["4."]
+        let result = simpleCalc.canAddPoint(inputs)
+        XCTAssertFalse(result)
+    }
 }
