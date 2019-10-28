@@ -67,9 +67,20 @@ class SimpleCalcTests: XCTestCase {
         let result = simpleCalc.didTappedEqualButton(inputs)
         XCTAssertNil(result)
     }
-    func testGivenDecimal_WhenInt_ThenFalse() {
+    func testGivenArray_WhenLastElementIsDecimal_ThenFalse() {
         let inputs = ["4."]
         let result = simpleCalc.canAddPoint(inputs)
         XCTAssertFalse(result)
     }
+    func testGivenArray_WhenLastElementIsInt_ThenTrue() {
+        let inputs = ["4"]
+        let result = simpleCalc.canAddPoint(inputs)
+        XCTAssertTrue(result)
+    }
+    func testGivenArray_WhenArrayIsEmpty_ThenFalse() {
+        let inputs = [String]()
+        let result = simpleCalc.canAddPoint(inputs)
+        XCTAssertFalse(result)
+    }
 }
+
